@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+
+<span th:if="${message}" th:text="${message}"></span>
+
+
+<form th:action="@{/registration}" method="post">
+    <div><label> User Name : <input type="text" name="username" required/> </label></div>
+    <div><label> Password: <input type="password" name="password" required/> </label></div>
+    <div><input type="submit" value="Sign Up"/></div>
+</form>
+
+<a href="/login">Sign In</a>
+
+</body>
+</html>
