@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Message {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String text;
@@ -21,14 +21,18 @@ public class Message {
     public Message() {
     }
 
-    public Message(String text, String tag, User user) {
+    public Message(String text, User user) {
         this.author = user;
         this.text = text;
+        this.time = new Date();
     }
 
     public Date getTime() {
         return time;
     }
+
+
+
 
     public void setTime(Date time) {
         this.time = time;

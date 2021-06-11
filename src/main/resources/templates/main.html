@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,18 @@
     </form>
 </div>
 
-Main page
+<div>
+    <form th:action="@{/main}" method="post">
+        <input type="text" name="text" placeholder="Введите сообщение"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<div>Список сообщений</div>
+<div th:each="el :  ${messages}">
+    <b><span th:text="${el.text}"/></b>
+    <span th:text="${el.author.getUsername()}"/>
+    <span th:text="${el.time}"/>
+</div>
+
 </body>
 </html>
