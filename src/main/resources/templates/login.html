@@ -2,22 +2,65 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Spring Security Example </title>
+    <title>Авторизация </title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 <body>
-<div th:if="${param.error}">
-  Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-  You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-  <div><label> User Name : <input type="text" name="username" required/> </label></div>
-  <div><label> Password: <input type="password" name="password" required/> </label></div>
-  <div><input type="submit" value="Sign In"/></div>
-</form>
 
-<a href="/registration">Add new user</a>
+<div class="container">
+
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Авторизация</h3>
+
+
+            </div>
+            <div class="card-body h-100">
+                <form th:action="@{/login}" method="post">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="username" placeholder="Логин">
+
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="Пароль">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn float-right login_btn"><b>Войти</b></button>
+                        <a href="/registration" type="submit" class="btn float-left signup_btn"><b>Регистрация</b></a>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div style="text-align: center">
+                <div th:if="${param.error}" class="text-danger ml-2 bg-dark">
+                    <h4>Неверные данные</h4>
+                </div>
+                <div th:if="${param.logout}" class="text-danger ml-2 bg-dark">
+                    <h4>Вы вышли</h4>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+</div>
+
 
 </body>
 </html>

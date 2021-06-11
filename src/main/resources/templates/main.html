@@ -2,26 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Чат</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 </head>
 <body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
 
-<div>
-    <form th:action="@{/main}" method="post">
-        <input type="text" name="text" placeholder="Введите сообщение"/>
-        <button type="submit">Добавить</button>
-    </form>
-</div>
-<div>Список сообщений</div>
-<div th:each="el :  ${messages}">
-    <b><span th:text="${el.text}"/></b>
-    <span th:text="${el.author.getUsername()}"/>
-    <span th:text="${el.time}"/>
+<div class="row">
+
+
+    <div class="col-lg-3">
+        <form th:action="@{/logout}" method="post" class="input-group">
+
+            <div style="text-align: center">
+                <b><p class="m-3" th:text="${user.getUsername()}"></p></b>
+                <button style="width: auto" type="submit"
+                        class="m-3 btn btn-dark btn-block">Выйти
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <div class="col-lg-5 col-12">
+
+        <div class="m-4">
+            <form th:action="@{/main}" method="post" class="input-group">
+                <div class="input-group mb-3">
+                    <input autofocus required name="text" type="text" class="form-control" placeholder="Введите сообщение..."
+                           aria-label=""
+                           aria-describedby="basic-addon1">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="submit"><b>Отправить</b></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <div><b><h2>Список сообщений:</h2></b></div>
+
+
+        <div th:each="el :  ${#lists.sort(messages)}"
+             th:attr="class=${user.id==el.author.id ? 'container darker' : 'container '}">
+        <span th:text="${el.author.getUsername()}"
+              th:attr="class=${user.id==el.author.id ? 'logo_in right' : 'logo_in'}"></span>
+            <p th:text="${el.text}" th:attr="style=${user.id==el.author.id ? 'float: right' : 'float: left'}"></p>
+            <span th:text="${el.getFormatDateAndTime()}"
+                  th:attr="class=${user.id==el.author.id ? 'time-left' : 'time-right'}"/>
+        </div>
+    </div>
 </div>
 
 </body>

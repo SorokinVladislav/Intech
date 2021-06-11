@@ -1,20 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example </title>
+    <title>Регистрация </title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 <body>
 
-<span th:if="${message}" th:text="${message}"></span>
+<div class="container">
+
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Регистрация</h3>
 
 
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username" required/> </label></div>
-    <div><label> Password: <input type="password" name="password" required/> </label></div>
-    <div><input type="submit" value="Sign Up"/></div>
-</form>
+            </div>
+            <div class="card-body h-100">
+                <form th:action="@{/registration}" method="post">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="username" placeholder="Логин">
 
-<a href="/login">Sign In</a>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="Пароль">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn float-right signup_btn "><b>Регистрация</b></button>
+                        <a href="/login" type="submit" class="btn float-left login_btn"><b>Вход</b></a>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div style="text-align: center">
+                <div th:if="${message}" class="text-danger ml-2 bg-dark">
+                    <h4 th:text="${message}"> Неверные данные</h4>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+</div>
+
 
 </body>
 </html>

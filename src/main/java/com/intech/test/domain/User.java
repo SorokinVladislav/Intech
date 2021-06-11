@@ -23,6 +23,8 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User() {

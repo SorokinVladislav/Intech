@@ -1,6 +1,5 @@
 package com.intech.test.controller;
 
-
 import com.intech.test.domain.Message;
 import com.intech.test.domain.User;
 import com.intech.test.repos.MessageRepo;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 public class MainController {
@@ -20,9 +21,11 @@ public class MainController {
     private MessageRepo messageRepo;
 
     @GetMapping("/main")
-    public String main(Model model) {
-        Iterable<Message> messages = messageRepo.findAll();
+    public String main(@AuthenticationPrincipal User user,
+                       Model model) {
+        List<Message> messages = (List<Message>) messageRepo.findAll();
         model.addAttribute("messages", messages);
+        model.addAttribute("user", user);
         return "main";
     }
 
@@ -38,14 +41,9 @@ public class MainController {
             Model model
     ) {
         Message message = new Message(text, user);
-
         messageRepo.save(message);
 
-        Iterable<Message> messages = messageRepo.findAll();
-
-        model.addAttribute("messages", messages);
-
-        return "main";
+        return "redirect:/main";
     }
 
 }

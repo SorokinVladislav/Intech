@@ -5,6 +5,7 @@ import com.intech.test.domain.Role;
 import com.intech.test.domain.User;
 import com.intech.test.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +32,11 @@ public class RegistrationController {
         User userFromDb = userRepo.findByUsername(username);
         System.out.println(username);
         if (userFromDb != null) {
-            model.addAttribute("message", "User exists!");
+            model.addAttribute("message", "Такой пользователь существует");
             return "registration";
         }
 
         User newUser = new User(username, password);
-
         newUser.setActive(true);
         newUser.setRoles(Collections.singleton(Role.USER));
         userRepo.save(newUser);
